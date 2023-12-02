@@ -1,15 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { deleteCookie } from "cookies-next";
 
 const Header = () => {
     const [show, setShow] = useState<Boolean>(false);
     const pathname = usePathname();
+    const router = useRouter();
+
+    const logout = () => {
+        deleteCookie("auth_token", { path: "/" });
+        router.push("/", { scroll: false });
+    };
 
     return (
         <div>
-            <nav className="bg-white dark:bg-gray-800  shadow ">
+            <nav className="bg-slate-900 text-white dark:bg-gray-800  shadow ">
                 <div className="px-8 mx-auto max-w-7xl">
                     <div className="flex items-center justify-between h-16">
                         <div className=" flex items-center">
@@ -27,7 +34,7 @@ const Header = () => {
                                     <Link
                                         className={`  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
                                             pathname === "/products"
-                                                ? "text-gray-800"
+                                                ? "text-white font-extrabold border-2"
                                                 : "text-gray-300"
                                         }`}
                                         href="/products">
@@ -36,7 +43,7 @@ const Header = () => {
                                     <Link
                                         className={` dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
                                             pathname === "/about"
-                                                ? "text-gray-800"
+                                                ? "text-white font-extrabold border-2"
                                                 : "text-gray-300"
                                         }`}
                                         href="/about">
@@ -45,7 +52,7 @@ const Header = () => {
                                     <Link
                                         className={`  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
                                             pathname === "/about/team"
-                                                ? "text-gray-800"
+                                                ? "text-white font-extrabold border-2"
                                                 : "text-gray-300"
                                         }`}
                                         href="/about/team">
@@ -54,7 +61,7 @@ const Header = () => {
                                     <Link
                                         className={`text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
                                             pathname === "/about/contact"
-                                                ? "text-gray-800"
+                                                ? "text-white font-extrabold border-2"
                                                 : "text-gray-300"
                                         }`}
                                         href="/about/contact">
@@ -70,7 +77,7 @@ const Header = () => {
                                         <div>
                                             <button
                                                 type="button"
-                                                className="  flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                className="  flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-white dark:text-gray-50 bg-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                                 id="options-menu"
                                                 onClick={() => setShow(!show)}>
                                                 <svg
@@ -109,14 +116,16 @@ const Header = () => {
                                                             <span>Account</span>
                                                         </span>
                                                     </Link>
-                                                    <Link
-                                                        href="#"
-                                                        className="block  px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
-                                                        role="menuitem">
+                                                    <button
+                                                        className="block w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+                                                        role="menuitem"
+                                                        onClick={() =>
+                                                            logout()
+                                                        }>
                                                         <span className="flex flex-col">
                                                             <span>Logout</span>
                                                         </span>
-                                                    </Link>
+                                                    </button>
                                                 </div>
                                             </div>
                                         )}

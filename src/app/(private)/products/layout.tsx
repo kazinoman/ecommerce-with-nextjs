@@ -13,9 +13,9 @@ export default function ProductsLayout({
     children: React.ReactNode;
 }) {
     return (
-        <section className="h-[100vh]">
+        <section className="">
             <Header />
-            <div className="mb-auto h-full">{children}</div>
+            <div className="">{children}</div>
             <Footer />
         </section>
     );
