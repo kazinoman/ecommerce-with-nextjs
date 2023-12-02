@@ -1,4 +1,30 @@
 import { ProductsService } from "@/services/products";
+import type { Metadata } from "next";
+
+type Props = {
+    params: { slug: string };
+    searchParams: { [key: string]: string | string[] | undefined };
+};
+
+// set metaData dynamically
+export async function generateMetadata({
+    params,
+    searchParams,
+}: Props): Promise<Metadata> {
+    // read route params
+    const id = params.slug;
+
+    // fetch data
+    const SingleProduct = await ProductsService.getSingleProduct(id);
+
+    // optionally access and extend (rather than replace) parent metadata
+    // const previousImages = (await parent).openGraph?.images || []
+
+    return {
+        title: SingleProduct.title,
+        description: SingleProduct.description,
+    };
+}
 
 export default async function SingleProductPage({
     params,
@@ -6,6 +32,11 @@ export default async function SingleProductPage({
     params: { slug: string };
 }) {
     const SingleProduct = await ProductsService.getSingleProduct(params.slug);
+
+    const metadata: Metadata = {
+        title: SingleProduct.title,
+        description: SingleProduct.description,
+    };
 
     return (
         <div className="max-w-6xl mx-auto p-10 flex flex-row gap-20">

@@ -1,5 +1,6 @@
 import { UserService } from "@/services/users";
 import { redirect } from "next/navigation";
+import { hasCookie } from "cookies-next";
 
 export default async function ProductsLayout({
     children,
@@ -8,11 +9,14 @@ export default async function ProductsLayout({
 }) {
     try {
         const res = await UserService.getUserInfo();
-        // console.log(res);
 
-        if (res.status === "401") {
+        if (res.statusCode === "401") {
             throw new Error("Unauthorize");
         }
+
+        // if (!hasCookie("auth_token")) {
+        //     redirect("/");
+        // }
 
         return (
             <section className="">
@@ -20,6 +24,6 @@ export default async function ProductsLayout({
             </section>
         );
     } catch (err) {
-        redirect("/login");
+        redirect("/");
     }
 }

@@ -22,7 +22,7 @@ export default function Home() {
             const res = await UserService.userLogin(credentials);
 
             if (res?.access_token) {
-                setCookie("auth_token", res.access_token, { path: "/" });
+                setCookie("auth_token", res.access_token);
                 router.push("/products");
                 toast.success("Successfully login.");
             } else {

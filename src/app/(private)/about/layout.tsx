@@ -13,7 +13,7 @@ export default function AboutLayout({
     children: React.ReactNode;
 }) {
     return (
-        <section className="h-[100vh]">
+        <section className="">
             <Header />
             <div className="mb-auto h-full">{children}</div>
             <Footer />

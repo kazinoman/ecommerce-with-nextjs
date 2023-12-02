@@ -32,13 +32,22 @@ const Header = () => {
                             <div className="hidden md:block">
                                 <div className="flex items-baseline ml-10 space-x-4">
                                     <Link
-                                        className={`  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
+                                        className={` hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
                                             pathname === "/products"
                                                 ? "text-white font-extrabold border-2"
                                                 : "text-gray-300"
                                         }`}
                                         href="/products">
                                         Home
+                                    </Link>
+                                    <Link
+                                        className={` hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
+                                            pathname === "/products/search"
+                                                ? "text-white font-extrabold border-2"
+                                                : "text-gray-300"
+                                        }`}
+                                        href="/products/search">
+                                        Search
                                     </Link>
                                     <Link
                                         className={` dark:text-white  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium ${

@@ -1,5 +1,6 @@
 import React from "react";
 import { ProductsType } from "@/lib/types/productsTypes";
+import Link from "next/link";
 
 const SingleProducts = ({
     id,
@@ -13,7 +14,7 @@ const SingleProducts = ({
 }: ProductsType) => {
     return (
         <div className="m-auto overflow-hidden rounded-lg shadow-lg cursor-pointer h-90 w-60 md:w-80">
-            <a
+            <Link
                 href={`/products/${id}`}
                 className="block w-full h-full">
                 {images.length > 0 && (
@@ -40,7 +41,7 @@ const SingleProducts = ({
                         </button>
                     </div>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };
